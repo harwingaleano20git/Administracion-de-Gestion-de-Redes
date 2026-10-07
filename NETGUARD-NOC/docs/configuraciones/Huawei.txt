@@ -1,0 +1,14 @@
+# PLANTILLA DE LABORATORIO: NO EJECUTADA
+# Validar SO, versión, modo, conectividad y autorización humana.
+# 127.0.0.1 solo sirve dentro del propio equipo; para equipos externos usar IP del colector.
+# Crear backup antes del cambio; no guardar hasta verificar recepción.
+system-view
+info-center enable
+info-center loghost 127.0.0.1 channel 2 port 1514
+info-center source default channel 2 log level informational
+quit
+# Verificación: display info-center
+# Reversa: undo info-center loghost 127.0.0.1; restaurar política anterior.
+# Revisar compatibilidad de port/channel en la versión VRP instalada.
+
+# Fuente oficial: https://info.support.huawei.com/hedex/api/pages/EDOC1000053358/YEF0907R/25/resources/en-us_cliref_0133018022.html

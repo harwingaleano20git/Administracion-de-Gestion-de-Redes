@@ -1,0 +1,17 @@
+# PLANTILLA DE LABORATORIO: NO EJECUTADA
+# Validar SO, versión, modo, conectividad y autorización humana.
+# 127.0.0.1 solo sirve dentro del propio equipo; para equipos externos usar IP del colector.
+# Crear backup antes del cambio; no guardar hasta verificar recepción.
+config log syslogd setting
+    set status enable
+    set server "127.0.0.1"
+    set mode udp
+    set port 1514
+end
+config log syslogd filter
+    set severity information
+end
+# Verificación: show log syslogd setting
+# Reversa: restaurar backup; deshabilitar syslogd solo si antes estaba deshabilitado.
+
+# Fuente oficial: https://docs.fortinet.com/document/fortigate/7.0.1/cli-reference/445620/config-log-syslogd-setting

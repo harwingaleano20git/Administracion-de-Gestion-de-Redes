@@ -1,0 +1,12 @@
+# PLANTILLA DE LABORATORIO: NO EJECUTADA
+# Validar SO, versión, modo, conectividad y autorización humana.
+# 127.0.0.1 solo sirve dentro del propio equipo; para equipos externos usar IP del colector.
+# Crear backup antes del cambio; no guardar hasta verificar recepción.
+configure terminal
+logging host 127.0.0.1 transport udp port 1514
+logging trap 6
+end
+! Verificación: show logging
+! Reversa: no logging host 127.0.0.1 transport udp port 1514
+
+# Fuente oficial: https://netascode.cisco.com/docs/data_models/iosxe/device/logging/
