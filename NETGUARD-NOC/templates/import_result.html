@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<section class="panel"><h2>Resultado de importación</h2><ul>{% for r in results %}<li>{{ 'Aceptado · evento '+r.id|string if r.accepted else 'No guardado · '+r.reason }}</li>{% endfor %}</ul><a class="secondary-button" href="/syslog">Ver eventos</a></section>{% endblock %}
