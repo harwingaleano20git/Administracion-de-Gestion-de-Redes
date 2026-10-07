@@ -40,6 +40,6 @@ Los mensajes requieren PRI 0–191 y fuente inventariada o localhost. Se limitan
 
 ## Entrega y continuidad
 
-El informe personal se entrega aparte; no subir la cédula a un repositorio público. Evidencias E04–E11 provienen de la ejecución local. E01–E02 requieren cuenta/repositorio GitHub y publicación real. No se reconstruye un historial anterior ficticio. La etiqueta prevista es `v0.2.0`; su publicación se verifica en GitHub.
+El informe personal se entrega aparte; no subir la cédula a un repositorio público. Evidencias E04–E11 provienen de la ejecución local. Repositorio: https://github.com/harwingaleano20git/Administracion-de-Gestion-de-Redes. Las capturas E01–E02 se agregan al informe personal. No se reconstruye un historial anterior ficticio. Release: https://github.com/harwingaleano20git/Administracion-de-Gestion-de-Redes/releases/tag/v0.2.0.
 
 Corte 3 requiere desarrollo y validación adicionales: equipos autorizados, SSH/RBAC/aprobaciones reales, Telegram y gestión de secretos, carga, despliegue, reversa, recuperación y manuales. No están certificados por este MVP.
