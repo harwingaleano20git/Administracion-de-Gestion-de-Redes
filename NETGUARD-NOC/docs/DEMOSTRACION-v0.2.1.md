@@ -48,3 +48,7 @@ Doce pruebas automatizadas aprobadas con base aislada. Se comprobó HTTP 200 par
 
 Referencia para el cliente SSH: https://docs.paramiko.org/en/stable/api/client.html
 Referencia para avisos: https://core.telegram.org/bots/api#sendmessage
+
+## Actualización comprobada · 10 de octubre de 2026
+
+Telegram ya tiene recepción real confirmada por captura y por el usuario. La práctica SSH dentro de Packet Tracer también está acreditada mediante ping, inicio de sesión y show version. Los apartados anteriores describen el estado al publicar v0.2.1; este resultado posterior lo actualiza. Sigue pendiente la conexión SSH desde la consola NETGUARD a un equipo externo. Detalle: docs/VERIFICACION-2026-10-10.md (desde docs: VERIFICACION-2026-10-10.md).

@@ -53,3 +53,7 @@ Consulta docs/Codigo-para-el-profesor.md. La ampliación local incluye consultas
 
 ## Demostración actual
 Guion: [docs/DEMOSTRACION-v0.2.1.md](docs/DEMOSTRACION-v0.2.1.md). Código por requisito: [docs/Codigo-para-el-profesor.md](docs/Codigo-para-el-profesor.md). La release v0.2.0 conserva el PDF y video originales; no acreditan las funciones de v0.2.1.
+
+## Actualización comprobada · 10 de octubre de 2026
+
+Telegram ya tiene recepción real confirmada por captura y por el usuario. La práctica SSH dentro de Packet Tracer también está acreditada mediante ping, inicio de sesión y show version. Los apartados anteriores describen el estado al publicar v0.2.1; este resultado posterior lo actualiza. Sigue pendiente la conexión SSH desde la consola NETGUARD a un equipo externo. Detalle: docs/VERIFICACION-2026-10-10.md (desde docs: VERIFICACION-2026-10-10.md).

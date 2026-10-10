@@ -40,3 +40,7 @@ No publicar la carpeta data: contiene base de datos y configuración local. La c
 Esta ampliación es posterior al release v0.2.0 publicado; ese release mantiene la entrega original. El PDF y video anteriores no se han modificado y no demuestran estas nuevas funciones.
 
 Referencia del cliente SSH: https://docs.paramiko.org/en/stable/api/client.html
+
+## Actualización comprobada · 10 de octubre de 2026
+
+Telegram ya tiene recepción real confirmada por captura y por el usuario. La práctica SSH dentro de Packet Tracer también está acreditada mediante ping, inicio de sesión y show version. Los apartados anteriores describen el estado al publicar v0.2.1; este resultado posterior lo actualiza. Sigue pendiente la conexión SSH desde la consola NETGUARD a un equipo externo. Detalle: docs/VERIFICACION-2026-10-10.md (desde docs: VERIFICACION-2026-10-10.md).
