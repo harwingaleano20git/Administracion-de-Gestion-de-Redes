@@ -20,7 +20,7 @@ from ipaddress import ip_address
 app = FastAPI(
     title="NETGUARD NOC",
     description="Plataforma de monitoreo Syslog y gestión de incidentes",
-    version="0.2.0"
+    version="0.2.1"
 )
 
 initialize()

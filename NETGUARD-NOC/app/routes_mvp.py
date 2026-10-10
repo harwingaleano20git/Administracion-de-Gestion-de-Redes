@@ -14,6 +14,27 @@ from app.services.noc import audit, ingest, make_config, simulate_command, utcno
 router = APIRouter()
 templates = None
 
+@router.get('/amenazas')
+def threats(request: Request):
+    from app.models.security import Threat, Notification
+    from app.services.security_notifications import settings, RULES
+    config = settings()
+    with SessionLocal() as db:
+        return page(request, 'amenazas.html', rules=RULES,
+            configured=bool(config.get('token') and config.get('chat_id')),
+            threats=db.query(Threat, SyslogMessage).join(SyslogMessage, Threat.message_id == SyslogMessage.id).order_by(Threat.id.desc()).limit(100).all(),
+            notifications=db.query(Notification).order_by(Notification.id.desc()).limit(100).all())
+
+@router.post('/notificaciones/{notification_id}/reintentar')
+def retry_notification(notification_id: int):
+    from app.models.security import Notification
+    from app.services.security_notifications import deliver
+    with SessionLocal() as db:
+        if not db.get(Notification, notification_id):
+            raise HTTPException(404, 'Notificación no encontrada')
+        deliver(db, notification_id)
+    return RedirectResponse('/amenazas', 303)
+
 def page(request, name, **context):
     return templates.TemplateResponse(request=request, name=name, context=context)
 
@@ -100,6 +121,19 @@ def console_page(request:Request):
 def console_post(request:Request,device_id:int=Form(...),command:str=Form(...),actor:str=Form(...)):
     with SessionLocal() as db:
         result=simulate_command(db,device_id,command[:500],actor)
+        return page(request,'consola.html',devices=db.query(Device).all(),commands=COMMANDS,output=result['output'])
+
+@router.post('/consola/ssh')
+def console_ssh(request:Request,device_id:int=Form(...),command:str=Form(...),actor:str=Form(...),username:str=Form(...),password:str=Form(...),approved:str=Form('')):
+    from app.services.ssh_console import query_device
+    from urllib.parse import urlsplit
+    origin=request.headers.get('origin')
+    if origin and urlsplit(origin).netloc != request.headers.get('host'):
+        raise HTTPException(403,'Solicitud desde otro origen bloqueada')
+    if len(command)>500 or len(username)>100 or len(password)>1024:
+        raise HTTPException(400,'Campos demasiado largos')
+    with SessionLocal() as db:
+        result=query_device(db,device_id,command,actor,username,password,approved=='si')
         return page(request,'consola.html',devices=db.query(Device).all(),commands=COMMANDS,output=result['output'])
 
 @router.get('/politicas')

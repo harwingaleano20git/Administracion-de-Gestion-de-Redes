@@ -117,7 +117,7 @@ class TestMVP(unittest.TestCase):
     def test_pages_and_incident_lifecycle(self):
         from app.main import app
         with TestClient(app) as client:
-            for path in ['/', '/inventario', '/syslog', '/alertas', '/incidentes', '/configuraciones', '/consola', '/politicas', '/auditoria']:
+            for path in ['/', '/inventario', '/syslog', '/alertas', '/incidentes', '/configuraciones', '/consola', '/politicas', '/auditoria', '/amenazas']:
                 self.assertEqual(client.get(path).status_code, 200, path)
             r = client.post('/syslog/importar', data={'source_ip':'10.10.0.1', 'content':'<131>error de laboratorio', 'actor':'Estudiante'})
             self.assertEqual(r.status_code, 200)

@@ -1,5 +1,14 @@
 # Cambios
 
+## v0.2.1 · 9 de octubre de 2026
+
+- Detección de seis clases de indicios con reglas visibles y registros.
+- Avisos Telegram con configuración local e historial de resultado.
+- Consola SSH de consultas permitidas y verificación de huella del servidor.
+- Guía de demostración y doce pruebas automatizadas.
+- Pendiente: recepción real Telegram y consulta a equipo externo autorizado.
+
+
 ## v0.2.0
 
 - Conserva inventario, Syslog y alertas de la versión previa.

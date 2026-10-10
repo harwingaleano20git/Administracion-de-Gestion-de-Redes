@@ -10,6 +10,7 @@ from app.models.syslog_message import SyslogMessage
 from app.models.alert import Alert
 from app.models.incident import Incident, IncidentNote
 from app.models.audit import Audit
+from app.services.security_notifications import register, deliver
 
 LEVELS = ['Emergencia', 'Alerta', 'Crítico', 'Error', 'Advertencia', 'Aviso', 'Informativo', 'Depuración']
 SOURCES = {
@@ -95,7 +96,10 @@ def ingest(db, message, source_ip, actor='Receptor local'):
         if row.severity <= 2:
             db.add(Alert(syslog_message_id=row.id, status='PENDIENTE', created_at=now))
         audit(db, actor, 'EVENTO_RECIBIDO', f'Evento {row.id}; facility {row.facility}; severidad {row.severity}', row.device_id)
+        notification_id = register(db, row, now)
         db.commit()
+        if notification_id:
+            deliver(db, notification_id)
         return {'accepted':True, 'id':row.id}
     except Exception:
         db.rollback()

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block content %}
+<section class="panel"><h1>Amenazas y Telegram</h1>
+<p>Los patrones identifican indicios para revisión humana; pueden existir falsos positivos y amenazas que estas reglas no detectan. El texto recibido nunca se ejecuta.</p>
+<p>Telegram: <strong>{{ 'Configurado' if configured else 'Sin configurar' }}</strong>. Las alertas críticas (0–2) y los eventos con indicios generan un aviso. El token no se muestra y el log completo no se envía.</p>
+<p>Configura el bot usando CONFIGURAR_TELEGRAM.cmd en la carpeta de la aplicación. Solo los eventos nuevos generan notificaciones.</p>
+<h2>Reglas visibles en el código</h2>
+{% for name, rule in rules.items() %}<p><strong>{{ name }}</strong>: {{ rule[1] }}</p>{% endfor %}
+<h2>Indicios detectados</h2><div class="table-container"><table><thead><tr><th>Evento</th><th>Origen</th><th>Indicio</th><th>Descripción</th></tr></thead><tbody>
+{% for threat, event in threats %}<tr><td>{{ event.id }}</td><td>{{ event.source_ip }}</td><td>{{ threat.rule }}</td><td>{{ threat.description }}</td></tr>{% else %}<tr><td colspan="4">No hay indicios registrados.</td></tr>{% endfor %}
+</tbody></table></div>
+<h2>Historial de notificaciones</h2><p>ENVIADA significa que Telegram aceptó el aviso, sin confirmar su lectura. Un reintento de un envío no confirmado puede producir duplicados.</p>
+<div class="table-container"><table><thead><tr><th>Evento</th><th>Estado</th><th>Resultado</th><th>Acción</th></tr></thead><tbody>
+{% for item in notifications %}<tr><td>{{ item.message_id }}</td><td>{{ item.status }}</td><td>{{ item.detail }}</td><td>{% if item.status != 'ENVIADA' %}<form method="post" action="/notificaciones/{{ item.id }}/reintentar"><button type="submit" class="secondary-button">Reintentar envío</button></form>{% else %}Enviada{% endif %}</td></tr>{% else %}<tr><td colspan="4">Sin notificaciones.</td></tr>{% endfor %}
+</tbody></table></div></section>{% endblock %}

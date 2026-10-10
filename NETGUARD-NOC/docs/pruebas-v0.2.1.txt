@@ -1,0 +1,9 @@
+NETGUARD NOC v0.2.1 - 9 de octubre de 2026
+Ejecución: python -m unittest discover -s tests -v
+Resultado verificado: 12 pruebas, OK, 0 fallos.
+Base de datos de pruebas aislada; no altera la base del usuario.
+Incluye Syslog, filtros/XSS, incidentes, tasa/tamaño, detección de indicios,
+resultado Telegram simulado, protocolo HTTPS con respuesta controlada,
+SSH con conexión sustituida, rechazo de huella y bloqueo antes de conectar.
+Pendientes: mensaje recibido en Telegram y consulta a equipo externo autorizado.
+Aviso no fatal existente: datetime.utcnow() de los datos iniciales está deprecado.
