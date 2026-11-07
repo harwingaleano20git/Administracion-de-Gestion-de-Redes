@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="panel">
+  <h1>Consulta Hermes · Evento {{ event_id }}</h1>
+  {% if error %}
+    <p role="alert">{{ error }}</p>
+  {% else %}
+    <p>Recomendación para revisión humana. No confirma un ataque ni ejecuta acciones.</p>
+    <pre style="white-space: pre-wrap; overflow-wrap: anywhere;">{{ answer }}</pre>
+  {% endif %}
+  <a class="secondary-button" href="/amenazas">Volver a Amenazas y Telegram</a>
+</section>
+{% endblock %}

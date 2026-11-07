@@ -1,5 +1,13 @@
 # Cambios
 
+## v0.2.2 · 7 de noviembre de 2026
+
+- Consulta manual de alertas con Hermes Agent sin enviar IP ni Syslog original.
+- Perfil local sin herramientas, compatibilidad con el descubrimiento del gateway y sesión independiente por consulta.
+- Prueba real con Ollama y Qwen3 4B Instruct; 18 pruebas automatizadas.
+- Telegram real comprobado; SSH dentro de Packet Tracer comprobado. La consulta SSH desde NETGUARD a un equipo externo sigue pendiente.
+
+
 ## v0.2.1 · 9 de octubre de 2026
 
 - Detección de seis clases de indicios con reglas visibles y registros.

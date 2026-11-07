@@ -10,6 +10,7 @@ from app.models.syslog_message import SyslogMessage
 from app.models.incident import Incident, IncidentNote
 from app.models.audit import Audit
 from app.services.noc import audit, ingest, make_config, simulate_command, utcnow, COMMANDS, SOURCES
+from app.services.hermes_alerts import HermesUnavailable, configured_key, consult_alert
 
 router = APIRouter()
 templates = None
@@ -22,8 +23,29 @@ def threats(request: Request):
     with SessionLocal() as db:
         return page(request, 'amenazas.html', rules=RULES,
             configured=bool(config.get('token') and config.get('chat_id')),
+            hermes_enabled=bool(configured_key()),
             threats=db.query(Threat, SyslogMessage).join(SyslogMessage, Threat.message_id == SyslogMessage.id).order_by(Threat.id.desc()).limit(100).all(),
             notifications=db.query(Notification).order_by(Notification.id.desc()).limit(100).all())
+
+@router.post('/amenazas/{event_id}/hermes')
+def consult_hermes(request: Request, event_id: int):
+    from app.models.security import Notification, Threat
+    if (request.url.hostname not in ('127.0.0.1', 'localhost', '::1')
+            or request.headers.get('sec-fetch-site') == 'cross-site'
+            or request.headers.get('origin', str(request.base_url).rstrip('/')) != str(request.base_url).rstrip('/')):
+        raise HTTPException(403, 'Consulta disponible solo desde NETGUARD local')
+    with SessionLocal() as db:
+        event = db.get(SyslogMessage, event_id)
+        if not event or not db.query(Notification.id).filter_by(message_id=event_id).first():
+            raise HTTPException(404, 'Alerta no encontrada')
+        severity = event.severity
+        indicators = [rule for (rule,) in db.query(Threat.rule).filter_by(message_id=event_id).all()]
+    try:
+        answer = consult_alert(event_id, severity, indicators)
+    except HermesUnavailable as exc:
+        return templates.TemplateResponse(request=request, name='hermes_alerta.html',
+            context={'event_id': event_id, 'error': str(exc)}, status_code=503)
+    return page(request, 'hermes_alerta.html', event_id=event_id, answer=answer)
 
 @router.post('/notificaciones/{notification_id}/reintentar')
 def retry_notification(notification_id: int):

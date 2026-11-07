@@ -1,4 +1,4 @@
-# NETGUARD NOC · v0.2.1
+# NETGUARD NOC · v0.2.2
 
 MVP académico individual de Harwin Galeano Beltran, UCompensar, Administración y Gestión de Redes, corte 2.
 
@@ -34,7 +34,7 @@ Utilizan una base aislada y un servidor temporal. No alteran la base de uso. Cas
 
 ## Seguridad y límites
 
-Los equipos iniciales son ejemplos de laboratorio. La versión v0.2.1 implementa consultas SSH y envíos Telegram configurables; su validación con equipo externo y cuenta Telegram sigue pendiente. No hay autenticación web ni RBAC efectivo. El actor se declara en los formularios. La aprobación de configuración documenta una revisión humana declarada; jamás ejecuta una configuración. Los estados ONLINE/OFFLINE se registran manualmente. La consola usa coincidencia exacta con una lista de comandos; el contenido del log nunca es una instrucción. La auditoría SQLite es editable por quien controla el archivo: el hash no garantiza inmutabilidad.
+Los equipos iniciales son ejemplos de laboratorio. La versión v0.2.1 implementa consultas SSH y envíos Telegram configurables; el envío Telegram se comprobó y la consulta a un equipo externo sigue pendiente. No hay autenticación web ni RBAC efectivo. El actor se declara en los formularios. La aprobación de configuración documenta una revisión humana declarada; jamás ejecuta una configuración. Los estados ONLINE/OFFLINE se registran manualmente. La consola usa coincidencia exacta con una lista de comandos; el contenido del log nunca es una instrucción. La auditoría SQLite es editable por quien controla el archivo: el hash no garantiza inmutabilidad.
 
 Los mensajes requieren PRI 0–191 y fuente inventariada o localhost. Se limitan a 8 KiB, 100 aceptados/minuto/fuente y deduplicación de 10 segundos. Son controles básicos locales; UDP no autentica al emisor. No exponer este MVP en Internet. Las plantillas requieren validación de sintaxis y versión en el dispositivo autorizado antes de cualquier uso real.
 
@@ -42,7 +42,7 @@ Los mensajes requieren PRI 0–191 y fuente inventariada o localhost. Se limitan
 
 El informe personal se entrega aparte; no subir la cédula a un repositorio público. Evidencias E04–E11 provienen de la ejecución local. Repositorio: https://github.com/harwingaleano20git/Administracion-de-Gestion-de-Redes. Las capturas E01–E02 se agregan al informe personal. No se reconstruye un historial anterior ficticio. Release: https://github.com/harwingaleano20git/Administracion-de-Gestion-de-Redes/releases/tag/v0.2.0.
 
-Pendientes: prueba externa SSH y Telegram, RBAC y aprobaciones efectivas, gestión de secretos, carga, despliegue, reversa y recuperación. La v0.2.1 no certifica estos requisitos.
+Pendientes: prueba externa SSH, RBAC y aprobaciones efectivas, gestión de secretos, carga, despliegue, reversa y recuperación. La v0.2.1 no certifica estos requisitos.
 
 ## Ampliación solicitada: amenazas y Telegram
 Se agregó detección por patrones, historial de avisos y configuración local de Telegram. Consulta docs/Telegram-y-amenazas.md. Esta ampliación local es posterior al release v0.2.0: el release publicado conserva la entrega original.
@@ -57,3 +57,7 @@ Guion: [docs/DEMOSTRACION-v0.2.1.md](docs/DEMOSTRACION-v0.2.1.md). Código por r
 ## Actualización comprobada · 10 de octubre de 2026
 
 Telegram ya tiene recepción real confirmada por captura y por el usuario. La práctica SSH dentro de Packet Tracer también está acreditada mediante ping, inicio de sesión y show version. Los apartados anteriores describen el estado al publicar v0.2.1; este resultado posterior lo actualiza. Sigue pendiente la conexión SSH desde la consola NETGUARD a un equipo externo. Detalle: docs/VERIFICACION-2026-10-10.md (desde docs: VERIFICACION-2026-10-10.md).
+
+## Consulta opcional con Hermes Agent
+
+Abre Amenazas y Telegram y selecciona Consultar con Hermes junto a una alerta. La consulta conserva la severidad y el estado de Telegram. Configuración: [Hermes Agent](docs/Hermes-Agent.md). [Prueba local real y resultados](docs/VERIFICACION-HERMES-2026-11-07.md). El iniciador Hermes usa las rutas del equipo de la demostración; en otro equipo sigue la guía.
